@@ -30,7 +30,7 @@ export class LoginPage {
        var headers = new Headers();
        headers.append('Content-Type', 'application/x-www-form-urlencoded');
        var data = JSON.stringify(login);
-       this.http.post("../scripte/checkLogin.php", data, {
+       this.http.post("/scripte/checkLogin.php", data, {
          headers: headers
         })
          .map(res => res.json())

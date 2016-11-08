@@ -31,7 +31,7 @@ export class UpdateCodePage {
 		if(updateForm.valid) {
 			var headers = new Headers();
 	       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-			this.http.post("../scripte/updateCode.php", update, {
+			this.http.post("/scripte/updateCode.php", update, {
 				headers: headers
 			})
 				.subscribe(data => this.barcodeService.loadCodes())

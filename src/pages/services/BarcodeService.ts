@@ -44,7 +44,7 @@ export class BarcodeService {
 	}
 
 	loadCodes() {
-		return this.http.get('../scripte/selectCode.php')
+		return this.http.get('/scripte/selectCode.php')
 				.toPromise()
 				.then(data => data.json().codes)
 	}
@@ -53,7 +53,7 @@ export class BarcodeService {
 		console.log(data);
 		var headers = new Headers();
        	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this.http.post("../scripte/saveCode.php", data, {
+		return this.http.post("/scripte/saveCode.php", data, {
 			headers: headers
 		})
 				.toPromise()
@@ -62,19 +62,19 @@ export class BarcodeService {
 	// 
 
 	loadCategories() {
-		return this.http.get("../scripte/getCategories.php")
+		return this.http.get("/scripte/getCategories.php")
 			.toPromise()
 			.then(data => data = data.json().categorie)
 	}
 
 	createFirstCategorie() {
-		return this.http.get("../scripte/createTableCategorie.php")
+		return this.http.get("/scripte/createTableCategorie.php")
 			.toPromise()
 			.then(data => data.json().categorie)
 	}
 
 	createCategorie(categorie) {
-		return this.http.get("../scripte/createCategorie.php?categorie=" + categorie)
+		return this.http.get("/scripte/createCategorie.php?categorie=" + categorie)
 			.toPromise()
 			.then(data => data.json())
 	}

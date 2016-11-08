@@ -48,7 +48,7 @@ export class BarcodePage {
 		console.log(code);
 		var headers = new Headers();
        	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		this.http.post("../scripte/deleteCode.php", code, {
+		this.http.post("/scripte/deleteCode.php", code, {
 			headers: headers
 		})
 			.subscribe(data => {console.log(data);

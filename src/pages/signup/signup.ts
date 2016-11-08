@@ -29,7 +29,7 @@ export class SignupPage {
 			var headers = new Headers();
 		    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 		    var data = JSON.stringify(signup);
-		    this.http.post("../scripte/register.php", data, {
+		    this.http.post("/scripte/register.php", data, {
 		    	headers: headers
 		    })
 		    .map(res => res.json())

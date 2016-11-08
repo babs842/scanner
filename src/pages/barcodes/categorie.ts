@@ -71,7 +71,7 @@ export class CategoriePage {
 	}
 
 	deleteCategorie(categorie) {
-		this.http.get("../scripte/deleteCategorie.php?categorie=" + categorie)
+		this.http.get("/scripte/deleteCategorie.php?categorie=" + categorie)
 			.subscribe(data => this.barcodeService.loadCategories().then(data => this.categories = data))
 	}
 }
@@ -112,7 +112,7 @@ export class CodeInCategorie{
 	}
 
 	ionViewWillEnter() {
-		this.http.get("../scripte/showCodeInCategorie.php?categorie=" + this.categorie)
+		this.http.get("/scripte/showCodeInCategorie.php?categorie=" + this.categorie)
 			.subscribe(data => {this.codeCategories = data.json().codeInCategorie})
 	}
 }
