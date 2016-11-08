@@ -1,0 +1,60 @@
+<ion-header>
+<ion-navbar>
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>        
+  </button>
+
+  <ion-title>Eigenen Code erstellen</ion-title>
+
+</ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <form #owncodeForm="ngForm" (ngSubmit)="createOwnCode(owncodeForm, owncode)" novalidate>
+      <ion-item>
+        <ion-label primary>Kategorie wählen</ion-label>
+        <ion-select [(ngModel)]="owncode.categorie" ngModel name="categorie" type="text" #categorie="ngModel" spellcheck="false" autocapitalize="off" required>
+        <ion-option *ngFor="let categorie of categories">{{categorie.categorie}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <p [hidden]="categorie.valid || submitted == false" danger padding-left>
+        Kategorie muss angegeben werden
+      </p>
+
+      <ion-item>
+        <ion-label floating primary>Code</ion-label>
+        <ion-input [(ngModel)]="owncode.text" ngModel name="text" type="text" #text="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="text.valid || submitted == false" danger padding-left>
+        Code muss angegeben werden
+      </p>
+
+      <ion-item>
+        <ion-label floating primary>Eigener Text</ion-label>
+        <ion-textarea [(ngModel)]="owncode.ownText" ngModel name="ownText" type="text" #ownText="ngModel" spellcheck="false" autocapitalize="off">
+        </ion-textarea>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating primary>Anzahl</ion-label>
+        <ion-input [(ngModel)]="owncode.anzahl" ngModel name="anzahl" type="number" #anzahl="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="anzahl.valid || submitted == false" danger padding-left>
+        Anzahl muss angegeben werden
+      </p>
+
+      <ion-row responsive-sm>
+        <ion-col>
+         <button ion-button type="submit">Speichern</button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </ion-list>
+</ion-content>

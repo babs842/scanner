@@ -1,0 +1,60 @@
+<ion-header>
+<ion-navbar>
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>        
+  </button>
+
+  <ion-title>Eigenen Code erstellen</ion-title>
+
+</ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <form #newcodeForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating primary>Kategorie</ion-label>
+        <ion-select [(ngModel)]="newcode.categorie" ngModel name="categorie" type="text" #categorie="ngModel" spellcheck="false" autocapitalize="off" required>
+        <ion-option *ngFor="let categorie of categories">{{categorie}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="categorie.valid || submitted == false" danger padding-left>
+        Kategorie muss ausgewählt werden
+      </p>
+
+      <ion-item>
+        <ion-label floating primary>Code</ion-label>
+        <ion-input [(ngModel)]="newcode.text" ngModel name="text" type="text" #text="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="text.valid || submitted == false" danger padding-left>
+        Code muss angegeben werden
+      </p>
+
+      <ion-item>
+        <ion-label floating primary>Eigener Text</ion-label>
+        <ion-input [(ngModel)]="newcode.ownText" ngModel name="ownText" type="text" #ownText="ngModel" spellcheck="false" autocapitalize="off">
+        </ion-input>
+      </ion-item>
+      <p [hidden]="ownText.valid || submitted == false" danger padding-left>
+        Format is required
+      </p>
+
+      <ion-item>
+        <ion-label floating primary>Anzahl</ion-label>
+        <ion-input [(ngModel)]="newcode.anzahl" ngModel name="anzahl" type="number" #anzahl="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="anzahl.valid || submitted == false" danger padding-left>
+        Anzahl muss angegeben werden
+      </p>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="saveCode(newcodeForm, newcode)" type="submit" primary block>Speichern</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+</ion-content>
