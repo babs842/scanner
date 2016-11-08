@@ -34,7 +34,7 @@ export class SignupPage {
 		    })
 		    .map(res => res.json())
 		       .subscribe(data => {this.nav.push(this.toastService.getMessage(data["error_msg"]));
-		                 if(data["error"] == false) this.nav.push(BarcodePage)});
+		                 if(data.error == false) this.nav.setRoot(BarcodePage)});
 		}
 	}
 }
