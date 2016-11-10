@@ -40,6 +40,7 @@ export class OwnCodePage {
 		if(form.valid) {
 			var code = this.barcodeService.getDateData(owncode);
 			this.barcodeService.saveCode(code);
+			this.nav.setRoot(BarcodePage);
 		}
 	}
 }

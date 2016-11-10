@@ -4,8 +4,8 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import {ToastService} from '../services/ToastService';
-
-import {BarcodePage} from '../barcodes/barcodes';
+import {LoginPage} from '../login/login';
+//import {BarcodePage} from '../barcodes/barcodes';
 import {UserData} from '../services/user-data';
 
 @Component({
@@ -34,7 +34,7 @@ export class SignupPage {
 		    })
 		    .map(res => res.json())
 		       .subscribe(data => {this.nav.push(this.toastService.getMessage(data["error_msg"]));
-		                if(data["error"] == false){this.nav.setRoot(BarcodePage)}});
+		                if(data["error"] == false){this.nav.setRoot(LoginPage)}});
 		}
 	}
 }

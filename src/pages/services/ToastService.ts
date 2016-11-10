@@ -11,9 +11,15 @@ export class ToastService {
 				public toast: ToastController) {}
 
 	getMessage(res) {
-		this.platform.ready().then(() => {
+		/*this.platform.ready().then(() => {
 			window.plugins.toast.show(res,'1000','center');
 				//.subscribe(toast => console.log(toast))
-		})
+		})*/
+		let toast = this.toast.create({
+			message: res,
+			duration: 1000,
+			position: 'middle'
+		});
+		toast.present();
 	}
 }

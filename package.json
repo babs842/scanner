@@ -29,8 +29,8 @@
     "build:before": "build",
     "run:before": "build"
   },
-  "name": "scanner",
-  "description": "scanner: An Ionic project",
+  "name": "barcode_scanner",
+  "description": "barcode_scanner: An Ionic project",
   "private": true,
   "cordovaPlugins": [
     "cordova-plugin-device",

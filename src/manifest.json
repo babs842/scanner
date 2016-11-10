@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "barcode_scanner",
+  "short_name": "scanner",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

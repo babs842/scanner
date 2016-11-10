@@ -17,7 +17,6 @@ export class UserData {
 		this.setID(user.login.id);
 		this.setUsername(user.login.name);
 		// this.events.publish('user:login');
-		console.log(user);
 	}
 
 	logout() {
