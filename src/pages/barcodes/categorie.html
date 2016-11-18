@@ -1,8 +1,16 @@
 <ion-header>
 <ion-navbar>
+<!--<ion-buttons>-->
   <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>        
   </button>
+  <!--</ion-buttons>-->
+
+<ion-buttons end>
+<button ion-button icon-only (click)="createCategorie()">
+<ion-icon name="md-add"></ion-icon>
+</button>
+  </ion-buttons>
 
   <ion-title>Nach Kategorie</ion-title>
 
@@ -19,11 +27,11 @@
 
 <ion-list>
 
-  <ion-list-header primary>Kategorien</ion-list-header>
-
-  <button ion-button full (click)="createCategorie()">
+  <!--<ion-list-header primary>Kategorien</ion-list-header>
+<button ion-button (click)="createCategorie()">
     Kategorie hinzufügen
-  </button>
+  </button>-->
+  
 
       <ion-list>
 
@@ -32,7 +40,7 @@
             {{categorie.categorie}}
             </ion-item>
             <ion-item-options>
-                <button danger (click)="deleteCategorie(categorie.categorie)"><ion-icon name="trash"></ion-icon> L&ouml;schen</button>
+                <button ion-button (click)="deleteCategorie(categorie.categorie)"><ion-icon name="trash"></ion-icon> L&ouml;schen</button>
                 </ion-item-options>
           </ion-item-sliding>
 

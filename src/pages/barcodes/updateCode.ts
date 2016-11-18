@@ -28,8 +28,6 @@ export class UpdateCodePage {
 
 
 	updateCode(updateForm, update) {
-		console.log("before");
-		console.log(update);
 		var newCode = {
 			id: update.id,
 			ma: this.userData.getUsername(),
@@ -39,7 +37,7 @@ export class UpdateCodePage {
 			ownText: update.ownText,
 			timeAdd: update.timeAdd
 		}
-		console.log("after");
+
 		console.log(newCode);
 
 		this.submitted = true;

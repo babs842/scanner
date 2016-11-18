@@ -3,7 +3,7 @@ import { MenuController, Nav, Platform } from 'ionic-angular';
 import { Splashscreen, StatusBar } from 'ionic-native';
 
 import {LoginPage} from '../pages/login/login';
-//import {AccountPage} from '../pages/account/account';
+import {AccountPage} from '../pages/account/account';
 import {ScanBarcodePage} from '../pages/scanCode/scanCode';
 import {BarcodePage} from '../pages/barcodes/barcodes';
 import {CategoriePage} from '../pages/barcodes/categorie';
@@ -39,6 +39,7 @@ export class BarcodeScannerApp {
       { title: 'Kategorien', component: CategoriePage },
       { title: 'Scannen', component: ScanBarcodePage },
       { title: 'Eigenen Code erstellen', component: OwnCodePage},
+      { title: 'Account', component: AccountPage},
       { title: 'Logout', component: LoginPage}
     ];
   }

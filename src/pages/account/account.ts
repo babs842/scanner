@@ -10,7 +10,7 @@ import { UserData } from '../services/user-data';
   templateUrl: 'account.html',
 })
 export class AccountPage {
-  username: string;
+  username: any;
 
   constructor(public alertCtrl: AlertController, 
               public nav: NavController,
@@ -24,6 +24,7 @@ export class AccountPage {
 
   updatePicture() {
     console.log('Clicked to update picture');
+    
   }
 
   // Present an alert with the current username populated
@@ -44,7 +45,7 @@ export class AccountPage {
     alert.addButton({
       text: 'Ok',
       handler: data => {
-        //this.userData.setUsername(data.username);
+        this.userData.setUsername(data.username);
         this.getUsername();
       }
     });
@@ -53,7 +54,8 @@ export class AccountPage {
   }
 
   getUsername() {
-
+    var user = this.userData.getUsername();
+    this.username = user;
   }
 
   changePassword() {
