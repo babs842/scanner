@@ -50,6 +50,7 @@ export class BarcodeService {
 	}
 	
 	saveCode(data) {
+		console.log("data in saveCode");
 		console.log(data);
 		var headers = new Headers();
        	headers.append('Content-Type', 'application/x-www-form-urlencoded');
