@@ -35,7 +35,8 @@ export class LoginPage {
         })
          .map(res => res.json())
            .subscribe(data => 
-                     {console.log(data);if(data.error == false) this.nav.setRoot(BarcodePage);this.userData.login(data)});
+                     {this.nav.push(this.toastService.getMessage(data["error_msg"]));if(data.error == false) this.nav.setRoot(BarcodePage);
+                       this.userData.login(data)});
      }
   
   }
