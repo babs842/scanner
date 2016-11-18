@@ -3,6 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {LoadingController, NavController, ModalController, NavParams, ViewController} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
+import {UserData} from '../services/user-data';
 //import {OwnCodePage} from '../ownCode/ownCode';
 import {ToastService} from '../services/ToastService';
 
@@ -19,6 +20,7 @@ export class UpdateCodePage {
 	constructor(public params: NavParams,
 				public http: Http,
 				public barcodeService: BarcodeService,
+				public userData: UserData,
 				public viewCtrl: ViewController) {
 		this.update = params.get('update');
 		this.barcodeService.loadCategories().then(data => this.categories = data);
@@ -26,15 +28,25 @@ export class UpdateCodePage {
 
 
 	updateCode(updateForm, update) {
-		console.log(update);
+
+		var newCode = {
+			id: update.id,
+			ma: this.userData.getUsername(),
+			categorie: update.categorie,
+			text: update.text,
+			anzahl: update.anzahl,
+			ownText: update.ownText,
+			timeAdd: update.timeAdd
+		}
+
 		this.submitted = true;
 		if(updateForm.valid) {
 			var headers = new Headers();
 	       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-			this.http.post("/scripte/updateCode.php", update, {
+			this.http.post("/scripte/updateCode.php", newCode, {
 				headers: headers
 			})
-				.subscribe(data => this.barcodeService.loadCodes())
+				.subscribe(data => {console.log(data.json());this.barcodeService.loadCodes()})
 			this.viewCtrl.dismiss();
 		}
 	}
