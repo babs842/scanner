@@ -4,7 +4,7 @@
     <ion-icon name="menu"></ion-icon>        
   </button>
 
-  <ion-title>Eigenen Code erstellen</ion-title>
+  <ion-title>Gescannter Code</ion-title>
 
 </ion-navbar>
 </ion-header>
@@ -16,7 +16,7 @@
       <ion-item>
         <ion-label floating primary>Kategorie</ion-label>
         <ion-select [(ngModel)]="newcode.categorie" ngModel name="categorie" type="text" #categorie="ngModel" spellcheck="false" autocapitalize="off" required>
-        <ion-option *ngFor="let categorie of categories">{{categorie}}</ion-option>
+        <ion-option *ngFor="let categorie of categories">{{categorie.categorie}}</ion-option>
         </ion-select>
       </ion-item>
       <p [hidden]="categorie.valid || submitted == false" danger padding-left>

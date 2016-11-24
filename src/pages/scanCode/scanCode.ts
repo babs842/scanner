@@ -68,10 +68,12 @@ export class ScanBarcodePage {
 		/*BarcodeScanner.scan().then((barcodeData) => {
 			let modal = this.modal.create(ScanPopover, {newcode: barcodeData});
 			modal.present();
+
 			//this.nav.push(ScanPopover, {newcode: barcodeData})
 		}, (err) => {
 			console.log(err);
-		})*/
+		})
+		this.nav.pop();*/
 
 		BarcodeScanner.scan().then((barcodeData) => {
 			this.nav.pop();
@@ -96,15 +98,15 @@ export class ScanPopover {
 				public barcodeService: BarcodeService,
 				public toast: ToastService) {
 		this.newcode = params.get('newcode');
-		//this.barcodeService.loadCategories().then(data => this.categories = data.categorie);
+		this.barcodeService.loadCategories().then(data => this.categories = data);
 	}
 
-	ionViewWillEnter() {
-		/*this.http.get("/scripte/getCategories.php")
+	/*ionViewWillEnter() {
+		this.http.get("/scripte/getCategories.php")
 			//.map(res => res.json())
-			.subscribe(data => {console.log(data);this.categories = data.json()})*/
-		this.barcodeService.loadCategories().then(data => this.categories = data.categorie);
-	}
+			.subscribe(data => {console.log(data);this.categories = data.json()})
+		//this.barcodeService.loadCategories().then(data => this.categories = data.categorie);
+	}*/
 
 	saveCode(form, newcode) {
 		console.log(newcode);
