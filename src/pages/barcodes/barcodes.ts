@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {LoadingController, NavController, ModalController, NavParams, ViewController} from 'ionic-angular';
+import {ActionSheetController, LoadingController, NavController, ModalController, NavParams, ViewController} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
-//import {OwnCodePage} from '../ownCode/ownCode';
+import {OwnCodePage} from '../ownCode/ownCode';
 import {ToastService} from '../services/ToastService';
 import {UpdateCodePage} from '../barcodes/updateCode';
+import {ScanBarcodePage} from '../scanCode/scanCode';
 
 @Component({
 	templateUrl: 'barcodes.html'
@@ -23,7 +24,8 @@ export class BarcodePage {
 				private loadingCtrl: LoadingController,
 				public nav: NavController,
 				public modal: ModalController,
-				public toast: ToastService) {
+				public toast: ToastService,
+				public actionSheet: ActionSheetController) {
 		this.barcode = "code";
 	}
 
@@ -55,5 +57,29 @@ export class BarcodePage {
 						this.toast.getMessage(data.json()["error_msg"]);
 						this.barcodeService.loadCodes().then(data => this.code = data)
 					})
+	}
+
+	showOptions() {
+		let choice = this.actionSheet.create({
+			buttons: [
+			{ 
+				text: "Scannen",
+				handler: () => {
+					this.nav.push(ScanBarcodePage);
+				}
+			},
+			{
+				text: "Eigenen Code erstellen",
+				handler: () => {
+					this.nav.push(OwnCodePage);
+				}
+			},
+			{
+				text: "Abbruch",
+				role: "cancel"
+			}
+			]
+		});
+		choice.present();
 	}
 }

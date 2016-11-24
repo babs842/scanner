@@ -37,8 +37,8 @@ export class BarcodeScannerApp {
     this.appPages = [
       { title: 'Barcodes', component: BarcodePage },
       { title: 'Kategorien', component: CategoriePage },
-      { title: 'Scannen', component: ScanBarcodePage },
-      { title: 'Eigenen Code erstellen', component: OwnCodePage},
+     // { title: 'Scannen', component: ScanBarcodePage },
+      //{ title: 'Eigenen Code erstellen', component: OwnCodePage},
       { title: 'Account', component: AccountPage},
       { title: 'Logout', component: LoginPage}
     ];

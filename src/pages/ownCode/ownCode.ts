@@ -17,7 +17,6 @@ import {BarcodePage} from '../barcodes/barcodes';
 
 export class OwnCodePage {
 	owncode: {categorie?: string, text?: string, anzahl?: number, ownText?: string, timeAdd?: any} = {};
-
 	submitted = false;
 	categories: any;
 	barcode: any;

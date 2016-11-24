@@ -18,7 +18,7 @@ export class ToastService {
 		let toast = this.toast.create({
 			message: res,
 			duration: 1000,
-			position: 'middle'
+			position: 'bottom'
 		});
 		toast.present();
 	}

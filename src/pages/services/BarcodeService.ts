@@ -60,7 +60,6 @@ export class BarcodeService {
 				.toPromise()
 				.then(data => {console.log(data.json());this.toast.getMessage(data.json()["error_msg"])})
 	}
-	// 
 
 	loadCategories() {
 		return this.http.get("/scripte/getCategories.php")

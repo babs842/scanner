@@ -4,6 +4,12 @@
     <ion-icon name="menu"></ion-icon>        
   </button>
 
+  <ion-buttons end>
+<button ion-button icon-only (click)="showOptions()">
+<ion-icon name="md-add"></ion-icon>
+</button>
+  </ion-buttons>
+
   <ion-title>Alle gespeicherten Barcodes</ion-title>
 
 </ion-navbar>
@@ -19,25 +25,25 @@
 
 <ion-list inset>
 
-      <!--<ion-list-header primary>Gespeicherte Codes</ion-list-header>-->
-          <ion-item-sliding *ngFor="let codes of code">
-          <ion-item>
+      <!--<ion-list-header primary>Gespeicherte Codes</ion-list-header>
+          <ion-item-sliding >-->
+          <ion-item *ngFor="let codes of code">
 
           Kategorie: {{codes.categorie}}<br>
-          Code: {{codes.text}}<br>
+          Inhalt: {{codes.text}}<br>
           Menge: {{codes.anzahl}}<br>
           Eigener Text: {{codes.ownText}}<br>
           Erstellt: {{codes.timeAdd}}<br>
-          Mitarbeiter: {{codes.ma}}
+          Mitarbeiter Kürzel: {{codes.ma}}
 
           </ion-item>
             
-            <ion-item-options>
+           <!-- <ion-item-options>
             <button ion-button (click)="editCode(codes)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
             <button ion-button color="danger" (click)="deleteCode(codes)"><ion-icon name="trash"></ion-icon> L&ouml;schen</button>
             </ion-item-options>
           
-          </ion-item-sliding>
+          </ion-item-sliding>-->
   </ion-list>
 
 </div>
