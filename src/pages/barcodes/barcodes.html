@@ -21,13 +21,44 @@
   <ion-refresher-content refreshingText="Neuladen..."></ion-refresher-content>
 </ion-refresher>
 
-<div>
 
-<ion-list inset>
+<ion-card *ngFor="let codes of code">
+    <ion-item>
+        Kategorie: {{codes.categorie}}
+    </ion-item>
+<ion-row>
+<ion-col>
+    <ion-card-content>
+        Inhalt: {{codes.text}}<br>
+        Menge: {{codes.anzahl}}<br>
+        Eigener Text: {{codes.ownText}}<br>
+        Erstellt: {{codes.timeAdd}}<br>
+        Mitarbeiter Kürzel: {{codes.ma}}
+    </ion-card-content>
+</ion-col>
+    
+        <ion-col>
+            <button ion-button clear small>
+                <div>Delete</div>
+            </button>
+        <!--</ion-col>
+
+        <ion-col>-->
+        <br>
+            <button ion-button clear small>
+                <div>Bearbeiten</div>
+            </button>
+        </ion-col>
+    </ion-row>
+</ion-card>
+
+<!--<div>
+
+<ion-list inset>-->
 
       <!--<ion-list-header primary>Gespeicherte Codes</ion-list-header>
           <ion-item-sliding >-->
-          <ion-item *ngFor="let codes of code">
+         <!-- <ion-item *ngFor="let codes of code" (click)="test()">
 
           Kategorie: {{codes.categorie}}<br>
           Inhalt: {{codes.text}}<br>
@@ -36,7 +67,7 @@
           Erstellt: {{codes.timeAdd}}<br>
           Mitarbeiter Kürzel: {{codes.ma}}
 
-          </ion-item>
+          </ion-item>-->
             
            <!-- <ion-item-options>
             <button ion-button (click)="editCode(codes)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
@@ -44,8 +75,8 @@
             </ion-item-options>
           
           </ion-item-sliding>-->
-  </ion-list>
+ <!-- </ion-list>
 
-</div>
+</div>-->
   
 </ion-content>

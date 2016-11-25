@@ -27,11 +27,11 @@ export class BarcodePage {
 				public toast: ToastService,
 				public actionSheet: ActionSheetController) {
 		this.barcode = "code";
+		this.barcodeService.createFirstCategorie();
 	}
 
 	ionViewWillEnter() {
 		this.barcodeService.loadCodes().then(data => this.code = data);
-		this.barcodeService.createFirstCategorie();
 	}
 
 	doRefresh(refresher) {
@@ -81,5 +81,9 @@ export class BarcodePage {
 			]
 		});
 		choice.present();
+	}
+
+	test() {
+
 	}
 }

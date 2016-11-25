@@ -31,7 +31,14 @@ export class BarcodeScannerApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      this.rootPage = LoginPage;
+      //this.rootPage = LoginPage;
+      //this.listenToLoginEvents();
+
+      if (this.userData.getUsername() !== null) {
+          this.rootPage = BarcodePage;
+      } else {
+        this.rootPage = LoginPage;
+      }
     });
 
     this.appPages = [

@@ -44,7 +44,6 @@ export class UserData {
 		localStorage.removeItem('username');
 	}
 
-
 	signup(data) {
 		this.setUsername(data.username);
 		this.events.publish('user:signup');
