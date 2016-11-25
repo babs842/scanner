@@ -24,6 +24,12 @@ export class LoginPage {
               public toastService: ToastService,
               public http: Http) {}
 
+  ionViewWillEnter() {
+    //let image = new HTMLImageElement();
+    //this.image = document.getElementById("userImg");
+    this.userData.getPicture();
+  }
+
   onLogin(form, login) {
     this.submitted = true;
     if(form.valid) {

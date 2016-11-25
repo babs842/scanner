@@ -15,7 +15,7 @@ export class AccountPage {
   constructor(public alertCtrl: AlertController, 
               public nav: NavController,
               public userData: UserData) {
-
+    this.userData.getPicture();
   }
 
   ngAfterViewInit() {
@@ -23,8 +23,7 @@ export class AccountPage {
   }
 
   updatePicture() {
-    console.log('Clicked to update picture');
-    
+    console.log('Clicked to update picture');    
   }
 
   // Present an alert with the current username populated

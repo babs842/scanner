@@ -48,4 +48,12 @@ export class UserData {
 		this.setUsername(data.username);
 		this.events.publish('user:signup');
 	}
+
+	getPicture() {
+		console.log("Bild geholt");
+		var img = new HTMLImageElement;
+		img.setAttribute("src", "../../assets/img/IMG_0464.JPG");
+		return document.getElementById("userImg").appendChild(img);
+		
+	}
 }
