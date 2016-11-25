@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {ActionSheetController, LoadingController, NavController, ModalController, NavParams, ViewController} from 'ionic-angular';
+import {ActionSheetController, AlertController, LoadingController, NavController, ModalController, NavParams, ViewController} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
 import {OwnCodePage} from '../ownCode/ownCode';
@@ -25,7 +25,8 @@ export class BarcodePage {
 				public nav: NavController,
 				public modal: ModalController,
 				public toast: ToastService,
-				public actionSheet: ActionSheetController) {
+				public actionSheet: ActionSheetController,
+				public alert: AlertController) {
 		this.barcode = "code";
 		this.barcodeService.createFirstCategorie();
 	}
@@ -61,21 +62,26 @@ export class BarcodePage {
 
 	showOptions() {
 		let choice = this.actionSheet.create({
+			title: "Hinzufügen",
+			enableBackdropDismiss: true,
 			buttons: [
 			{ 
 				text: "Scannen",
+				icon: "md-qr-scanner",
 				handler: () => {
 					this.nav.push(ScanBarcodePage);
 				}
 			},
 			{
 				text: "Eigenen Code erstellen",
+				icon: "md-create",
 				handler: () => {
 					this.nav.push(OwnCodePage);
 				}
 			},
 			{
 				text: "Abbruch",
+				icon: "md-close",
 				role: "cancel"
 			}
 			]
@@ -83,7 +89,14 @@ export class BarcodePage {
 		choice.present();
 	}
 
-	test() {
-
-	}
+	showCode(codes) {
+		let details = this.alert.create({
+			title: "Details",
+			message: "<b>Text: </b>" + codes.ownText + 
+						"<br><b>Erstellt: </b>" + codes.timeAdd + 
+						"<br><b>Mitarbeiter: </b>" + codes.ma,
+			buttons: ["Ok"]
+		});
+		details.present();
+	} 
 }

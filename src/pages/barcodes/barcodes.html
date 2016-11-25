@@ -6,7 +6,7 @@
 
   <ion-buttons end>
 <button ion-button icon-only (click)="showOptions()">
-<ion-icon name="md-add"></ion-icon>
+<ion-icon name="add"></ion-icon>
 </button>
   </ion-buttons>
 
@@ -24,59 +24,34 @@
 
 <ion-card *ngFor="let codes of code">
     <ion-item>
-        Kategorie: {{codes.categorie}}
+      Beschreibung: {{codes.text}}
     </ion-item>
-<ion-row>
-<ion-col>
-    <ion-card-content>
-        Inhalt: {{codes.text}}<br>
-        Menge: {{codes.anzahl}}<br>
-        Eigener Text: {{codes.ownText}}<br>
-        Erstellt: {{codes.timeAdd}}<br>
-        Mitarbeiter Kürzel: {{codes.ma}}
-    </ion-card-content>
-</ion-col>
-    
-        <ion-col>
-            <button ion-button clear small>
-                <div>Delete</div>
-            </button>
-        <!--</ion-col>
 
-        <ion-col>-->
-        <br>
-            <button ion-button clear small>
+
+    <ion-card-content (click)="showCode(codes)">
+        Menge: {{codes.anzahl}}<br>
+        Kategorie: {{codes.categorie}}
+        <!--Eigener Text: {{codes.ownText}}<br>
+        Erstellt: {{codes.timeAdd}}<br>
+        Mitarbeiter Kürzel: {{codes.ma}}-->
+    </ion-card-content>
+
+    <ion-row>
+
+    <ion-col>
+            <button ion-button icon-left clear small (click)="editCode(codes)">
+              <ion-icon name="create"></ion-icon>
                 <div>Bearbeiten</div>
             </button>
         </ion-col>
+
+        <ion-col>
+            <button ion-button icon-left clear small (click)="deleteCode(codes)">
+              <ion-icon name="trash"></ion-icon>
+                <div>Delete</div>
+            </button>
+        </ion-col>
+
     </ion-row>
-</ion-card>
-
-<!--<div>
-
-<ion-list inset>-->
-
-      <!--<ion-list-header primary>Gespeicherte Codes</ion-list-header>
-          <ion-item-sliding >-->
-         <!-- <ion-item *ngFor="let codes of code" (click)="test()">
-
-          Kategorie: {{codes.categorie}}<br>
-          Inhalt: {{codes.text}}<br>
-          Menge: {{codes.anzahl}}<br>
-          Eigener Text: {{codes.ownText}}<br>
-          Erstellt: {{codes.timeAdd}}<br>
-          Mitarbeiter Kürzel: {{codes.ma}}
-
-          </ion-item>-->
-            
-           <!-- <ion-item-options>
-            <button ion-button (click)="editCode(codes)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
-            <button ion-button color="danger" (click)="deleteCode(codes)"><ion-icon name="trash"></ion-icon> L&ouml;schen</button>
-            </ion-item-options>
-          
-          </ion-item-sliding>-->
- <!-- </ion-list>
-
-</div>-->
-  
+</ion-card>  
 </ion-content>
