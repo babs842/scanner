@@ -27,7 +27,11 @@ export class LoginPage {
   ionViewWillEnter() {
     //let image = new HTMLImageElement();
     //this.image = document.getElementById("userImg");
-    this.userData.getPicture();
+    //this.userData.getPicture();
+    var img = new HTMLImageElement;
+    img.setAttribute("src", "../../assets/img/IMG_0464.JPG");
+    var t = document.getElementById("userImg");
+    t.appendChild(img);
   }
 
   onLogin(form, login) {

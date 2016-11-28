@@ -32,9 +32,16 @@ export class CategoriePage {
 	doRefresh(refresher) {
 		this.barcodeService.loadCategories().then(data => this.categories = data);
 
+		let loading = this.loadingCtrl.create({
+			content: "Lade Kategorien...",
+			duration: 2000,
+			dismissOnPageChange: true
+		});
+		loading.present();
+
 		setTimeout(() => {
 			refresher.complete();
-		}, 1000);
+		}, 500)
 	}
 
 	showCodeCategorie(categorie) {

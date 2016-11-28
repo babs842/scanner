@@ -31,16 +31,34 @@ export class BarcodePage {
 		this.barcodeService.createFirstCategorie();
 	}
 
-	ionViewWillEnter() {
-		this.barcodeService.loadCodes().then(data => this.code = data);
+	onInput(ev: any) {
+		this.barcodeService.loadCodes();
+
+		let val = ev.target.value;
+		if (val && val.trim() != '') {
+			this.barcode = this.barcode.filter((barcode) => {
+				return (barcode.toLowerCase().indexOf(val.toLowerCase()) > -1);
+			})
+		}
 	}
 
-	doRefresh(refresher) {
+	loading(refresher) {
 		this.barcodeService.loadCodes().then(data => this.code = data);
+
+		let loading = this.loadingCtrl.create({
+			content: "Lade Barcodes...",
+			duration: 2000,
+			dismissOnPageChange: true
+		});
+		loading.present();
 
 		setTimeout(() => {
 			refresher.complete();
-		}, 1000);
+		}, 500)
+	}
+
+	ionViewWillEnter() {
+		this.barcodeService.loadCodes().then(data => this.code = data);
 	}
 
 	editCode(code) {

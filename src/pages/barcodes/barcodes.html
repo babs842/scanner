@@ -12,14 +12,17 @@
 
   <ion-title>Alle gespeicherten Barcodes</ion-title>
 
-</ion-navbar>
 
+
+</ion-navbar>
+<ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content class="barcode">
-<ion-refresher (ionRefresh)="doRefresh($event)">
-  <ion-refresher-content refreshingText="Neuladen..."></ion-refresher-content>
+ <ion-refresher (ionRefresh)="loading($event)">
+ <!--<ion-refresher-content refreshingText="Neuladen..."></ion-refresher-content>-->
 </ion-refresher>
+
 
 
 <ion-card *ngFor="let codes of code">
