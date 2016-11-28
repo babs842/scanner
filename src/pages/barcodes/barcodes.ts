@@ -31,17 +31,6 @@ export class BarcodePage {
 		this.barcodeService.createFirstCategorie();
 	}
 
-	onInput(ev: any) {
-		this.barcodeService.loadCodes();
-
-		let val = ev.target.value;
-		if (val && val.trim() != '') {
-			this.barcode = this.barcode.filter((barcode) => {
-				return (barcode.toLowerCase().indexOf(val.toLowerCase()) > -1);
-			})
-		}
-	}
-
 	loading(refresher) {
 		this.barcodeService.loadCodes().then(data => this.code = data);
 
