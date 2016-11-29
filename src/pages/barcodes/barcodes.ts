@@ -18,6 +18,9 @@ export class BarcodePage {
 	categories: any;
 	codeCategories: any;
 	barcode: any;
+	showList = false;
+
+	items: any;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
@@ -29,8 +32,42 @@ export class BarcodePage {
 				public alert: AlertController) {
 		this.barcode = "code";
 		this.barcodeService.createFirstCategorie();
+		this.initializeItems();
 	}
 
+	initializeItems() {
+		this.http.get("/scripte/selectCode.php")
+					.subscribe(data => {console.log(data);
+						this.items = data.json().codes;
+						console.log(this.items.text)});
+		
+	}
+
+	onInput(ev) {
+		this.showList = true;
+		this.initializeItems();
+		var val = ev.target.value;
+
+		/*for(var i = 0; i < this.code.length; i++) {
+			if(val == this.code) {
+				this.code = (this.code).filter((code) => {
+					return code;
+				});
+			}
+		}*/
+
+		if(val && val.trim() != '') {
+			//if(val.value == this.code.value) {
+				this.items = this.items.filter((item) => {
+					return (item.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+					//return item;
+				});
+			//}
+		} else {
+			this.showList = false;
+		}
+	}
+ 
 	loading(refresher) {
 		this.barcodeService.loadCodes().then(data => this.code = data);
 

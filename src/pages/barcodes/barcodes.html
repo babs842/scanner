@@ -15,14 +15,21 @@
 
 
 </ion-navbar>
-<ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>
+
+<ion-toolbar>
+  <ion-searchbar (ionInput)="onInput($event)" placeholder="Search"></ion-searchbar>
+    <ion-list *ngIf="showList">
+      <ion-item *ngFor="let item of items">
+      {{item}}
+      </ion-item>
+    </ion-list>
+</ion-toolbar>
 </ion-header>
 
 <ion-content class="barcode">
  <ion-refresher (ionRefresh)="loading($event)">
  <!--<ion-refresher-content refreshingText="Neuladen..."></ion-refresher-content>-->
 </ion-refresher>
-
 
 
 <ion-card *ngFor="let codes of code">
