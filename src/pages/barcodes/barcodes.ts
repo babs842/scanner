@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {ActionSheetController, AlertController, LoadingController, NavController, ModalController, NavParams, ViewController} from 'ionic-angular';
+import {ActionSheetController, AlertController, LoadingController, NavController} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
 import {OwnCodePage} from '../ownCode/ownCode';
@@ -18,45 +18,35 @@ export class BarcodePage {
 	categories: any;
 	codeCategories: any;
 	barcode: any;
-	showList = false;
-	showContent = true;
-
-	items: any;
-	test;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
 				private loadingCtrl: LoadingController,
 				public nav: NavController,
-				public modal: ModalController,
 				public toast: ToastService,
 				public actionSheet: ActionSheetController,
 				public alert: AlertController) {
+		//barcodes that are given to BarcodePage
 		this.barcode = "code";
+		//creates first categorie "Allgemein"
 		this.barcodeService.createFirstCategorie();
-		this.initializeItems();
 	}
 
-	initializeItems() {
-		this.barcodeService.loadCodes().then(data => this.code = data);
-		
-	}
-
+/* 	- function which controlls the input in the searchbar
+*	- shows results of the input 
+*/
 	onInput(ev) {
-		this.showList = true;
-		this.initializeItems();
 		var val = ev.target.value;
 		if(val && val.trim() != '') {
-			this.items = this.code.filter((item) => {
-				this.showContent = false;
-				return (item.text.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+			this.code = this.code.filter((codes) => {
+				return (codes.text.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
 			});
 		} else {
-			this.showList = false;
-			this.showContent = true;
+			this.ionViewWillEnter();
 		}
 	}
- 
+
+/* manually loads the codes from the database */
 	loading(refresher) {
 		this.barcodeService.loadCodes().then(data => this.code = data);
 
@@ -69,30 +59,50 @@ export class BarcodePage {
 
 		setTimeout(() => {
 			refresher.complete();
+			this.toast.getMessage("Erfolgreich geladen");
 		}, 500)
 	}
 
+/* gets all saved codes when sites is entered */
 	ionViewWillEnter() {
 		this.barcodeService.loadCodes().then(data => this.code = data);
 	}
 
+/* edit code */
 	editCode(code) {
 		this.nav.push(UpdateCodePage, {update: code});
 	}
 
+/* delete code */
 	deleteCode(code) {
-		console.log(code);
-		var headers = new Headers();
-       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		this.http.post("/scripte/deleteCode.php", code, {
-			headers: headers
-		})
-			.subscribe(data => {console.log(data);
-						this.toast.getMessage(data.json()["error_msg"]);
-						this.barcodeService.loadCodes().then(data => this.code = data)
+		let alert = this.alert.create({
+			title: "Barcode löschen",
+			message: "Soll der Barcode wirklich gelöscht werden?",
+			buttons: [
+			{
+				text: "Abbrechen"
+			},
+			{
+				text: "Löschen",
+				handler: () => {
+					var headers = new Headers();
+			       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
+					this.http.post("/scripte/deleteCode.php", code, {
+						headers: headers
 					})
+						.subscribe(data => {console.log(data);
+									this.toast.getMessage(data.json()["error_msg"]);
+									this.barcodeService.loadCodes().then(data => this.code = data)
+								})
+				}
+			}]
+		});
+
+		alert.present();
 	}
 
+/* by click on the add-sign it will show diffenrent options that can be choosen like 
+			scan a new code or type one by yourself */
 	showOptions() {
 		let choice = this.actionSheet.create({
 			title: "Hinzufügen",
@@ -122,6 +132,7 @@ export class BarcodePage {
 		choice.present();
 	}
 
+/* shows details of a codes that has been choosen by a click on the card */
 	showCode(codes) {
 		let details = this.alert.create({
 			title: "Details",

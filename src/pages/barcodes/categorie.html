@@ -1,10 +1,9 @@
 <ion-header>
 <ion-navbar>
-<!--<ion-buttons>-->
+
   <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>        
   </button>
-  <!--</ion-buttons>-->
 
 <ion-buttons end>
 <button ion-button icon-only (click)="createCategorie()">
@@ -16,22 +15,20 @@
 
 </ion-navbar>
 
+<!-- Searchbar to search for specific categorie -->
+<ion-toolbar>
+  <ion-searchbar (ionInput)="onInput($event)" placeholder="Suche nach Kategorie"></ion-searchbar>
+</ion-toolbar>
+
 </ion-header>
 
 <ion-content>
 <ion-refresher (ionRefresh)="doRefresh($event)">
- <!-- <ion-refresher-content refreshingText="Neuladen..."></ion-refresher-content>-->
 </ion-refresher>
 
-<div>
+<!--<div>
 
 <ion-list>
-
-  <!--<ion-list-header primary>Kategorien</ion-list-header>
-<button ion-button (click)="createCategorie()">
-    Kategorie hinzufügen
-  </button>-->
-  
 
       <ion-list>
 
@@ -45,44 +42,31 @@
           </ion-item-sliding>
 
     </ion-list>
-
-    <!--<ion-list *ngFor="let codeCategorie of codeCategories">
-        <ion-item>
-          Kategorie: {{codeCategorie.categorie}}<br>
-          Code: {{codeCategorie.text}}<br>
-          Menge: {{codeCategorie.anzahl}}<br>
-          Eigener Text: {{codeCategorie.ownText}}<br>
-          Erstellt: {{codeCategorie.timeAdd}}
-        </ion-item>
-        </ion-list>-->
   </ion-list>
-</div>
+</div>-->
+
+<ion-card *ngFor="let categorie of categories">
+<ion-row>
+<ion-col>
+<ion-item (click)="showCodeCategorie(categorie.categorie)">
+{{categorie.categorie}}
+</ion-item>
+</ion-col>
+<ion-col width-33>
+<ion-buttons end>
+          <!--  <button ion-button icon-left clear small item-right>
+              <ion-icon name="create"></ion-icon>
+                <div>Bearbeiten</div>
+            </button>
+<hr>-->
+            <button ion-button icon-left clear small color="danger" (click)="deleteCategorie(categorie.categorie)">
+              <ion-icon name="trash"></ion-icon>
+                <div>Löschen</div>
+            </button>
+</ion-buttons>
+</ion-col>
+
+</ion-row>
+</ion-card>
   
 </ion-content>
-
-
-<!--<div>
-      <h1>Alle Codes</h1>
-      <p>(Zum Neuladen der gespeicherten Codes die Seite nach unten ziehen,<br>
-            zum Bearbeiten oder L&ouml;schen eines gespeicherten Codes nach links wischen)</p>      
-        <ion-list>
-          <ion-list-header primary>Gespeicherte Codes</ion-list-header>
-          <ion-item-sliding *ngFor="let codes of code">
-          <ion-item>
-
-          Kategorie: {{codes.categorie}}<br>
-          Text: {{codes.text}}<br>
-          Format: {{codes.format}}<br>
-          Menge: {{codes.anzahl}}<br>
-          Erstellt: {{codes.timeAdd}}
-
-          </ion-item>
-            
-            <ion-item-options>
-            <button edit (click)="editCode(codes)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
-            <button danger (click)="deleteCode(codes)"><ion-icon name="trash"></ion-icon> L&ouml;schen</button>
-            </ion-item-options>
-          
-          </ion-item-sliding>
-        </ion-list>
-      </div>-->

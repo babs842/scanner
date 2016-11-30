@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-//import {} from 'ionic-native';
 import {Platform, ToastController} from 'ionic-angular';
 
-declare var window: any;
+//declare var window: any;
 
 @Injectable()
 export class ToastService {

@@ -3,7 +3,6 @@ import {Http} from '@angular/http';
 import {LoadingController, AlertController, NavController, ModalController, NavParams} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
-//import {OwnCodePage} from '../ownCode/ownCode';
 import {ToastService} from '../services/ToastService';
 
 @Component({
@@ -11,7 +10,7 @@ import {ToastService} from '../services/ToastService';
 })
 
 export class CategoriePage {
-	categories: string[];
+	categories: any;
 	codeCategories: string[];
 	barcode: any;
 
@@ -23,9 +22,10 @@ export class CategoriePage {
 				public toast: ToastService,
 				public alertCtrl: AlertController) {
 		this.barcodeService.createFirstCategorie();
+		this.barcodeService.loadCategories().then(data => this.categories = data)
 	}
 
-	ionViewWillEnter() {
+	loadCategories() {
 		this.barcodeService.loadCategories().then(data => this.categories = data);
 	}
 
@@ -44,10 +44,18 @@ export class CategoriePage {
 		}, 500)
 	}
 
+	onInput(ev) {
+		var val = ev.target.value;
+		if(val && val.trim() != '') {
+			this.categories = this.categories.filter((categorie) => {
+				return (categorie.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+			});
+		} else {
+			this.loadCategories();
+		}
+	}
+
 	showCodeCategorie(categorie) {
-		/*this.http.get("../scripte/showCodeInCategorie.php?categorie=" + categorie)
-			.subscribe(data => {console.log(data.json().codeInCategorie);this.codeCategories = data.json().codeInCategorie;
-							this.nav.push(CodeInCategorie, this.codeCategories)})*/
 		this.nav.push(CodeInCategorie, {categories: categorie});
 	}
 
@@ -78,8 +86,23 @@ export class CategoriePage {
 	}
 
 	deleteCategorie(categorie) {
-		this.http.get("/scripte/deleteCategorie.php?categorie=" + categorie)
+		let alert = this.alertCtrl.create({
+			title: "Kategorie löschen",
+			message: "Soll die Kategorie wirklich gelöscht werden?",
+			buttons: [
+			{
+				text: "Abbrechen"
+			},
+			{
+				text: "Löschen",
+				handler: () => {
+					this.http.get("/scripte/deleteCategorie.php?categorie=" + categorie)
 			.subscribe(data => this.barcodeService.loadCategories().then(data => this.categories = data))
+				}
+			}]
+		});
+
+		alert.present();
 	}
 }
 
@@ -96,16 +119,40 @@ export class CategoriePage {
 				</ion-header>
 
 				<ion-content>
-		<ion-list *ngFor="let codeCategorie of codeCategories">
-        <ion-item>
-          Kategorie: {{codeCategorie.categorie}}<br>
-          Code: {{codeCategorie.text}}<br>
-          Menge: {{codeCategorie.anzahl}}<br>
-          Eigener Text: {{codeCategorie.ownText}}<br>
-          Erstellt: {{codeCategorie.timeAdd}}
-        </ion-item>
-        </ion-list>
-        </ion-content>
+				<ion-card *ngFor="let codeCategorie of codeCategories">
+				<ion-row>
+				<ion-col>
+				<ion-item>
+					Beschreibung: {{codeCategorie.text}}<br>
+				</ion-item>
+				    <ion-card-content>
+				      
+				      Menge: {{codeCategorie.anzahl}}<br>
+				      Kategorie: {{codeCategorie.categorie}}<br>			          
+			          Eigener Text: {{codeCategorie.ownText}}<br>
+			          Erstellt: {{codeCategorie.timeAdd}}
+				    </ion-card-content>
+				    </ion-col>
+
+				    <ion-col>
+				    <ion-buttons end>
+				            <button ion-button icon-left clear small (click)="editCode(codes)">
+				              <ion-icon name="create"></ion-icon>
+				                <div>Bearbeiten</div>
+				            </button>
+				        <hr>
+				            <button ion-button icon-left clear small color="danger" (click)="deleteCode(codes)">
+				              <ion-icon name="trash"></ion-icon>
+				                <div>Delete</div>
+				            </button>
+				      
+				       </ion-buttons>
+				        </ion-col>
+				    </ion-row>
+
+				</ion-card>  
+				</ion-content>
+		
 	`
 })
 
@@ -123,3 +170,16 @@ export class CodeInCategorie{
 			.subscribe(data => {this.codeCategories = data.json().codeInCategorie})
 	}
 }
+
+/*
+<ion-list *ngFor="let codeCategorie of codeCategories">
+        <ion-item>
+          Kategorie: {{codeCategorie.categorie}}<br>
+          Code: {{codeCategorie.text}}<br>
+          Menge: {{codeCategorie.anzahl}}<br>
+          Eigener Text: {{codeCategorie.ownText}}<br>
+          Erstellt: {{codeCategorie.timeAdd}}
+        </ion-item>
+        </ion-list>
+        </ion-content>
+*/

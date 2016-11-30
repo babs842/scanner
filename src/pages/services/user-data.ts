@@ -16,7 +16,6 @@ export class UserData {
 	login(user) {
 		this.setID(user.login.id);
 		this.setUsername(user.login.name);
-		// this.events.publish('user:login');
 	}
 
 	logout() {
@@ -33,6 +32,14 @@ export class UserData {
 
 	setUsername(username) {
 		localStorage.setItem('username', username);
+		var user = {
+			id: localStorage.getItem('ma_id'),
+			name: localStorage.getItem('username')
+		}
+
+		this.http.post('/scripte/updateUsername.php', user)
+				.toPromise()
+				.then(data => console.log(data.json()))
 	}
 
 	getUsername() {
@@ -49,7 +56,14 @@ export class UserData {
 		this.events.publish('user:signup');
 	}
 
-	getPicture() {
-		console.log("Bild geholt");		
+	changePW(password) {
+		var user = {
+			id: localStorage.getItem('ma_id'),
+			name: localStorage.getItem('username'),
+			password: password
+		}
+		this.http.post('/scripte/updateUserPassword.php', user)
+				.toPromise()
+				.then(data => console.log(data.json()))
 	}
 }

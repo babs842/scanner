@@ -15,25 +15,17 @@ export class AccountPage {
   constructor(public alertCtrl: AlertController, 
               public nav: NavController,
               public userData: UserData) {
-    this.userData.getPicture();
   }
 
   ngAfterViewInit() {
     this.getUsername();
   }
 
-  updatePicture() {
-    console.log('Clicked to update picture');    
-  }
-
-  // Present an alert with the current username populated
-  // clicking OK will update the username and display it
-  // clicking Cancel will close the alert and do nothing
   changeUsername() {
     let alert = this.alertCtrl.create({
-      title: 'Change Username',
+      title: 'Username ändern',
       buttons: [
-        'Cancel'
+        'Abbruch'
       ]
     });
     alert.addInput({
@@ -42,7 +34,7 @@ export class AccountPage {
       placeholder: 'username'
     });
     alert.addButton({
-      text: 'Ok',
+      text: 'Ändern',
       handler: data => {
         this.userData.setUsername(data.username);
         this.getUsername();
@@ -58,7 +50,24 @@ export class AccountPage {
   }
 
   changePassword() {
-    console.log('Clicked to change password');
+    let alert = this.alertCtrl.create({
+      title: 'Passwort ändern',
+      buttons: [
+        'Abbruch'
+      ]
+    });
+    alert.addInput({
+      name: 'password',
+      placeholder: 'password'
+    });
+    alert.addButton({
+      text: 'Ändern',
+      handler: data => {
+        this.userData.changePW(data.password);
+      }
+    });
+
+    alert.present();
   }
 
   logout() {

@@ -1,5 +1,5 @@
 <ion-header>
-<ion-navbar  *ngIf="showContent">
+<ion-navbar>
   <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>        
   </button>
@@ -11,57 +11,47 @@
   </ion-buttons>
 
   <ion-title>Alle gespeicherten Barcodes</ion-title>
-
-
-
 </ion-navbar>
 
+<!-- Searchbar -->
 <ion-toolbar>
-  <ion-searchbar (ionInput)="onInput($event)" placeholder="Search"></ion-searchbar>
-    <ion-list *ngIf="showList">
-      <ion-item *ngFor="let item of items">
-      {{item.text}}
-      </ion-item>
-    </ion-list>
+  <ion-searchbar (ionInput)="onInput($event)" placeholder="Suche nach Barcode"></ion-searchbar>
 </ion-toolbar>
 </ion-header>
 
-<ion-content class="barcode">
+<ion-content class="barcode" >
  <ion-refresher (ionRefresh)="loading($event)">
- <!--<ion-refresher-content refreshingText="Neuladen..."></ion-refresher-content>-->
 </ion-refresher>
 
-
+<!-- puts codes in a card for tidy summary -->
 <ion-card *ngFor="let codes of code">
+<ion-row>
+<ion-col (click)="showCode(codes)">
     <ion-item>
       Beschreibung: {{codes.text}}
     </ion-item>
 
-
-    <ion-card-content (click)="showCode(codes)">
+<!-- shows more details about a code when the related card is clicked -->
+    <ion-card-content >
         Menge: {{codes.anzahl}}<br>
         Kategorie: {{codes.categorie}}
-        <!--Eigener Text: {{codes.ownText}}<br>
-        Erstellt: {{codes.timeAdd}}<br>
-        Mitarbeiter Kürzel: {{codes.ma}}-->
     </ion-card-content>
+</ion-col>
 
-    <ion-row>
-
-    <ion-col>
+<ion-col offset width-33>
+<!-- buttons for edit and delete one of the codes -->
+<ion-buttons end>
             <button ion-button icon-left clear small (click)="editCode(codes)">
               <ion-icon name="create"></ion-icon>
                 <div>Bearbeiten</div>
             </button>
-        </ion-col>
-
-        <ion-col>
-            <button ion-button icon-left clear small (click)="deleteCode(codes)">
+<hr>
+            <button ion-button icon-left clear small color="danger" (click)="deleteCode(codes)">
               <ion-icon name="trash"></ion-icon>
-                <div>Delete</div>
+                <div>Löschen</div>
             </button>
-        </ion-col>
-
-    </ion-row>
+</ion-buttons>
+</ion-col>
+</ion-row>
 </ion-card>  
 </ion-content>
