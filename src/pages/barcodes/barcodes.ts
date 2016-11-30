@@ -39,7 +39,7 @@ export class BarcodePage {
 		var val = ev.target.value;
 		if(val && val.trim() != '') {
 			this.code = this.code.filter((codes) => {
-				return (codes.text.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+				return (codes.ownText.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
 			});
 		} else {
 			this.ionViewWillEnter();
