@@ -19,8 +19,10 @@ export class BarcodePage {
 	codeCategories: any;
 	barcode: any;
 	showList = false;
+	showContent = true;
 
 	items: any;
+	test;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
@@ -36,10 +38,7 @@ export class BarcodePage {
 	}
 
 	initializeItems() {
-		this.http.get("/scripte/selectCode.php")
-					.subscribe(data => {console.log(data);
-						this.items = data.json().codes;
-						console.log(this.items.text)});
+		this.barcodeService.loadCodes().then(data => this.code = data);
 		
 	}
 
@@ -47,24 +46,14 @@ export class BarcodePage {
 		this.showList = true;
 		this.initializeItems();
 		var val = ev.target.value;
-
-		/*for(var i = 0; i < this.code.length; i++) {
-			if(val == this.code) {
-				this.code = (this.code).filter((code) => {
-					return code;
-				});
-			}
-		}*/
-
 		if(val && val.trim() != '') {
-			//if(val.value == this.code.value) {
-				this.items = this.items.filter((item) => {
-					return (item.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
-					//return item;
-				});
-			//}
+			this.items = this.code.filter((item) => {
+				this.showContent = false;
+				return (item.text.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+			});
 		} else {
 			this.showList = false;
+			this.showContent = true;
 		}
 	}
  

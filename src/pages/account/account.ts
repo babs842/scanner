@@ -62,7 +62,7 @@ export class AccountPage {
   }
 
   logout() {
-  //  this.userData.logout();
+    this.userData.rmData();
     this.nav.setRoot(LoginPage);
   }
 }

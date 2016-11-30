@@ -50,10 +50,6 @@ export class UserData {
 	}
 
 	getPicture() {
-		console.log("Bild geholt");
-		var img = new HTMLImageElement;
-		img.setAttribute("src", "../../assets/img/IMG_0464.JPG");
-		return document.getElementById("userImg").appendChild(img);
-		
+		console.log("Bild geholt");		
 	}
 }
