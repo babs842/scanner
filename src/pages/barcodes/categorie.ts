@@ -4,6 +4,7 @@ import {LoadingController, AlertController, NavController, ModalController, NavP
 
 import {BarcodeService} from '../services/BarcodeService';
 import {ToastService} from '../services/ToastService';
+import {Constants} from '../services/constants';
 
 @Component({
 	templateUrl: 'categorie.html'
@@ -13,6 +14,7 @@ export class CategoriePage {
 	categories: any;
 	codeCategories: string[];
 	barcode: any;
+	url: string;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
@@ -20,7 +22,9 @@ export class CategoriePage {
 				public nav: NavController,
 				public modal: ModalController,
 				public toast: ToastService,
-				public alertCtrl: AlertController) {
+				public alertCtrl: AlertController,
+				public constants: Constants) {
+		this.url = constants.root_dir;
 		this.barcodeService.createFirstCategorie();
 		this.barcodeService.loadCategories().then(data => this.categories = data)
 	}
@@ -96,7 +100,7 @@ export class CategoriePage {
 			{
 				text: "Löschen",
 				handler: () => {
-					this.http.get("/scripte/deleteCategorie.php?categorie=" + categorie)
+					this.http.get(this.url + "/scripte/deleteCategorie.php?categorie=" + categorie)
 			.subscribe(data => this.barcodeService.loadCategories().then(data => this.categories = data))
 				}
 			}]
@@ -159,14 +163,17 @@ export class CategoriePage {
 export class CodeInCategorie{
 	categorie: string[];
 	codeCategories: any[];
+	url: string;
 
 	constructor(public params: NavParams,
-				public http: Http){
+				public http: Http,
+				public constants: Constants){
 		this.categorie = params.get('categories');
+		this.url = constants.root_dir;
 	}
 
 	ionViewWillEnter() {
-		this.http.get("/scripte/showCodeInCategorie.php?categorie=" + this.categorie)
+		this.http.get(this.url + "/scripte/showCodeInCategorie.php?categorie=" + this.categorie)
 			.subscribe(data => {this.codeCategories = data.json().codeInCategorie})
 	}
 }

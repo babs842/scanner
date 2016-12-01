@@ -6,7 +6,7 @@ import {NavParams, NavController, Toast} from 'ionic-angular';
 
 import {UserData} from '../services/user-data';
 import {ToastService} from '../services/ToastService';
-
+import {Constants} from '../services/constants';
 import {BarcodePage} from '../barcodes/barcodes';
 import {SignupPage} from '../signup/signup';
 
@@ -18,20 +18,14 @@ export class LoginPage {
   login: {username?: string, password?: any} = {};
   //username: any;
   submitted = false;
+  url: string;
 
   constructor(public nav: NavController,
               public userData: UserData,
               public toastService: ToastService,
-              public http: Http) {}
-
-  ionViewWillEnter() {
-    //let image = new HTMLImageElement();
-    //this.image = document.getElementById("userImg");
-    //this.userData.getPicture();
-    var img = new HTMLImageElement;
-    img.setAttribute("src", "../../assets/img/IMG_0464.JPG");
-    var t = document.getElementById("userImg");
-    t.appendChild(img);
+              public http: Http,
+              public constants: Constants) {
+    this.url = constants.root_dir;
   }
 
   onLogin(form, login) {
@@ -40,7 +34,7 @@ export class LoginPage {
        var headers = new Headers();
        headers.append('Content-Type', 'application/x-www-form-urlencoded');
        var data = JSON.stringify(login);
-       this.http.post("/scripte/checkLogin.php", data, {
+       this.http.post(this.url + "/scripte/checkLogin.php", data, {
          headers: headers
         })
          .map(res => res.json())

@@ -12,6 +12,7 @@ import {BarcodeService} from '../services/BarcodeService';
 })
 
 export class ScanBarcodePage {
+	barcode: string;
 	constructor(public nav: NavController,
 				public modal: ModalController) {
 
@@ -45,7 +46,10 @@ export class ScanPopover {
 				public nav: NavController,
 				public barcodeService: BarcodeService,
 				public toast: ToastService) {
-		this.newcode = params.get('newcode');
+		var test = params.get('newcode');
+		this.newcode = {
+			barcode: test.text
+		}
 		this.barcodeService.loadCategories().then(data => this.categories = data);
 	}
 

@@ -5,6 +5,7 @@ import {LoadingController, NavController, ModalController, NavParams, ViewContro
 import {BarcodeService} from '../services/BarcodeService';
 import {UserData} from '../services/user-data';
 import {ToastService} from '../services/ToastService';
+import {Constants} from '../services/constants';
 
 @Component({
 	templateUrl: 'updateCode.html'
@@ -15,12 +16,15 @@ export class UpdateCodePage {
 	update: any;
 	code: any;
 	submitted = false;
+	url: string;
 
 	constructor(public params: NavParams,
 				public http: Http,
 				public barcodeService: BarcodeService,
 				public userData: UserData,
-				public viewCtrl: ViewController) {
+				public viewCtrl: ViewController,
+				public constants: Constants) {
+		this.url = constants.root_dir;
 		this.update = params.get('update');
 		this.barcodeService.loadCategories().then(data => this.categories = data);
 	}
@@ -43,7 +47,7 @@ export class UpdateCodePage {
 		if(updateForm.valid) {
 			var headers = new Headers();
 	       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-			this.http.post("/scripte/updateCode.php", newCode, {
+			this.http.post(this.url + "/scripte/updateCode.php", newCode, {
 				headers: headers
 			})
 				.subscribe(data => {console.log(data.json());this.barcodeService.loadCodes()})

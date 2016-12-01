@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 import {ToastService} from '../services/ToastService';
 import {LoginPage} from '../login/login';
-//import {BarcodePage} from '../barcodes/barcodes';
+import {Constants} from '../services/constants';
 import {UserData} from '../services/user-data';
 
 @Component({
@@ -15,12 +15,14 @@ import {UserData} from '../services/user-data';
 export class SignupPage {
 	signup: {username?: string, email?: string, password?: any} = {};
 	submitted = false;
+	url: string;
 
 	constructor(public nav: NavController, 
 				public userData: UserData,
 				public http: Http,
-				public toastService: ToastService) {
-
+				public toastService: ToastService,
+				public constants: Constants) {
+		this.url = constants.root_dir;
 	}
 
 	onSignup(form, signup) {
@@ -29,7 +31,7 @@ export class SignupPage {
 			var headers = new Headers();
 		    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 		    var data = JSON.stringify(signup);
-		    this.http.post("/scripte/register.php", data, {
+		    this.http.post(this.url + "/scripte/register.php", data, {
 		    	headers: headers
 		    })
 		    .map(res => res.json())

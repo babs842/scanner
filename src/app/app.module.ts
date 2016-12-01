@@ -5,6 +5,7 @@ import { BarcodeScannerApp } from './app.component';
 import {UserData} from '../pages/services/user-data';
 import {ToastService} from '../pages/services/ToastService';
 import {BarcodeService} from '../pages/services/BarcodeService';
+import {Constants} from '../pages/services/constants';
 
 import {BarcodeScanner} from 'ionic-native';
 
@@ -54,6 +55,7 @@ import {CategoriePage} from '../pages/barcodes/categorie';
     UserData,
     BarcodeService,
     ToastService,
+    Constants,
     { provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

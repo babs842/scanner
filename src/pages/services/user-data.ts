@@ -4,14 +4,19 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import {Events} from 'ionic-angular';
+import {Constants} from '../services/constants';
 
 
 @Injectable()
 export class UserData {
 	LOGGED_IN = 'loggedIn';
+	url: string;
 
 	constructor(public events: Events,
-				public http: Http) {}
+				public http: Http,
+				public constants: Constants) {
+		this.url = constants.root_dir;
+	}
 
 	login(user) {
 		this.setID(user.login.id);
@@ -40,7 +45,7 @@ export class UserData {
 			name: localStorage.getItem('username')
 		}
 
-		this.http.post('/scripte/updateUsername.php', user)
+		this.http.post(this.url + '/scripte/updateUsername.php', user)
 				.toPromise()
 				.then(data => {console.log(data.json().userUpdate)})
 	}
@@ -65,7 +70,7 @@ export class UserData {
 			name: localStorage.getItem('username'),
 			password: password
 		}
-		this.http.post('/scripte/updateUserPassword.php', user)
+		this.http.post(this.url + '/scripte/updateUserPassword.php', user)
 				.toPromise()
 				.then(data => console.log(data.json()))
 	}

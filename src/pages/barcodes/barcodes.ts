@@ -5,6 +5,7 @@ import {ActionSheetController, AlertController, LoadingController, NavController
 import {BarcodeService} from '../services/BarcodeService';
 import {OwnCodePage} from '../ownCode/ownCode';
 import {ToastService} from '../services/ToastService';
+import {Constants} from '../services/constants';
 import {UpdateCodePage} from '../barcodes/updateCode';
 import {ScanBarcodePage} from '../scanCode/scanCode';
 
@@ -18,6 +19,7 @@ export class BarcodePage {
 	categories: any;
 	codeCategories: any;
 	barcode: any;
+	url: string;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
@@ -25,11 +27,13 @@ export class BarcodePage {
 				public nav: NavController,
 				public toast: ToastService,
 				public actionSheet: ActionSheetController,
-				public alert: AlertController) {
+				public alert: AlertController,
+				public constants: Constants) {
 		//barcodes that are given to BarcodePage
 		this.barcode = "code";
 		//creates first categorie "Allgemein"
 		this.barcodeService.createFirstCategorie();
+		this.url = constants.root_dir;
 	}
 
 /* 	- function which controlls the input in the searchbar
@@ -87,7 +91,7 @@ export class BarcodePage {
 				handler: () => {
 					var headers = new Headers();
 			       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-					this.http.post("/scripte/deleteCode.php", code, {
+					this.http.post(this.url + "/scripte/deleteCode.php", code, {
 						headers: headers
 					})
 						.subscribe(data => {console.log(data);
