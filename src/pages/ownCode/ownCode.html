@@ -25,27 +25,24 @@
       </p>
       
       <ion-item>
-        <ion-label floating primary>Code</ion-label>
-        <ion-input [(ngModel)]="owncode.text" ngModel name="text" type="text" #text="ngModel" required>
+        <ion-label floating primary>Barcode</ion-label>
+        <ion-input [(ngModel)]="owncode.barcode" ngModel name="barcode" type="text" #barcode="ngModel" required>
         </ion-input>
       </ion-item>
-      <p [hidden]="text.valid || submitted == false" danger padding-left>
-        Code muss angegeben werden
-      </p>
 
       <ion-item>
-        <ion-label floating primary>Eigener Text</ion-label>
-        <ion-textarea [(ngModel)]="owncode.ownText" ngModel name="ownText" type="text" #ownText="ngModel" spellcheck="false" autocapitalize="off">
+        <ion-label floating primary>Beschreibung</ion-label>
+        <ion-textarea [(ngModel)]="owncode.description" ngModel name="description" type="text" #description="ngModel" spellcheck="false" autocapitalize="off">
         </ion-textarea>
       </ion-item>
 
 
       <ion-item>
         <ion-label floating primary>Anzahl</ion-label>
-        <ion-input [(ngModel)]="owncode.anzahl" ngModel name="anzahl" type="number" #anzahl="ngModel" required>
+        <ion-input [(ngModel)]="owncode.quantity" ngModel name="quantity" type="number" #quantity="ngModel" required>
         </ion-input>
       </ion-item>
-      <p [hidden]="anzahl.valid || submitted == false" danger padding-left>
+      <p [hidden]="quantity.valid || submitted == false" danger padding-left>
         Anzahl muss angegeben werden
       </p>
 

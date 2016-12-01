@@ -37,6 +37,7 @@ export class AccountPage {
       text: 'Ändern',
       handler: data => {
         this.userData.setUsername(data.username);
+        this.userData.changeUsername(data.username);
         this.getUsername();
       }
     });

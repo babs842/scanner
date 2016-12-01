@@ -29,14 +29,12 @@ export class BarcodeService {
 		timeAdd += date.getMinutes() + ":";
 		timeAdd += date.getSeconds();
 
-		// var ma_id = this.userData.getId();
-
 		var barcode = {
-			ma: this.userData.getUsername(),
+			staff: this.userData.getUsername(),
 			categorie: data.categorie,
-			text: data.text,
-			anzahl: data.anzahl,
-			ownText: data.ownText,
+			barcode: data.barcode,
+			quantity: data.quantity,
+			description: data.description,
 			timeAdd: timeAdd
 		}
 

@@ -39,7 +39,7 @@ export class BarcodePage {
 		var val = ev.target.value;
 		if(val && val.trim() != '') {
 			this.code = this.code.filter((codes) => {
-				return (codes.ownText.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+				return (codes.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
 			});
 		} else {
 			this.ionViewWillEnter();
@@ -136,9 +136,9 @@ export class BarcodePage {
 	showCode(codes) {
 		let details = this.alert.create({
 			title: "Details",
-			message: "<b>Text: </b>" + codes.ownText + 
+			message: "<b>Beschreibung: </b>" + codes.description + 
 						"<br><b>Erstellt: </b>" + codes.timeAdd + 
-						"<br><b>Mitarbeiter: </b>" + codes.ma,
+						"<br><b>Mitarbeiter: </b>" + codes.staff,
 			buttons: ["Ok"]
 		});
 		details.present();

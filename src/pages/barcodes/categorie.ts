@@ -123,13 +123,13 @@ export class CategoriePage {
 				<ion-row>
 				<ion-col>
 				<ion-item>
-					Beschreibung: {{codeCategorie.text}}<br>
+					Barcode: {{codeCategorie.barcode}}<br>
 				</ion-item>
 				    <ion-card-content>
 				      
-				      Menge: {{codeCategorie.anzahl}}<br>
+				      Menge: {{codeCategorie.quantity}}<br>
 				      Kategorie: {{codeCategorie.categorie}}<br>			          
-			          Eigener Text: {{codeCategorie.ownText}}<br>
+			          Eigener Text: {{codeCategorie.description}}<br>
 			          Erstellt: {{codeCategorie.timeAdd}}
 				    </ion-card-content>
 				    </ion-col>
@@ -143,7 +143,7 @@ export class CategoriePage {
 				        <hr>
 				            <button ion-button icon-left clear small color="danger" (click)="deleteCode(codes)">
 				              <ion-icon name="trash"></ion-icon>
-				                <div>Delete</div>
+				                <div>Löschen</div>
 				            </button>
 				      
 				       </ion-buttons>
@@ -170,16 +170,3 @@ export class CodeInCategorie{
 			.subscribe(data => {this.codeCategories = data.json().codeInCategorie})
 	}
 }
-
-/*
-<ion-list *ngFor="let codeCategorie of codeCategories">
-        <ion-item>
-          Kategorie: {{codeCategorie.categorie}}<br>
-          Code: {{codeCategorie.text}}<br>
-          Menge: {{codeCategorie.anzahl}}<br>
-          Eigener Text: {{codeCategorie.ownText}}<br>
-          Erstellt: {{codeCategorie.timeAdd}}
-        </ion-item>
-        </ion-list>
-        </ion-content>
-*/

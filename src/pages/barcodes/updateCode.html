@@ -20,36 +20,31 @@
         </ion-select>
       </ion-item>
       <p [hidden]="categorie.valid || submitted == false" danger padding-left>
-        Format is required
+        Kategorie is required
       </p>
 
       <ion-item>
-        <ion-label floating primary>Code</ion-label>
-        <ion-input [(ngModel)]="update.text" ngModel name="text" type="text" #text="ngModel" required>
+        <ion-label floating primary>Barcode</ion-label>
+        <ion-input [(ngModel)]="update.barcode" ngModel name="barcode" type="text" #barcode="ngModel" required>
         </ion-input>
       </ion-item>
-      <p [hidden]="text.valid || submitted == false" danger padding-left>
-        Inhalt is required
-      </p>
 
       <ion-item>
         <ion-label floating primary>Anzahl</ion-label>
-        <ion-input [(ngModel)]="update.anzahl" ngModel name="anzahl" type="number" #anzahl="ngModel" required>
+        <ion-input [(ngModel)]="update.quantity" ngModel name="quantity" type="number" #quantity="ngModel" required>
         </ion-input>
       </ion-item>
-      <p [hidden]="anzahl.valid || submitted == false" danger padding-left>
+      <p [hidden]="quantity.valid || submitted == false" danger padding-left>
         Anzahl is required
       </p>
 
 
       <ion-item>
         <ion-label floating primary>Eigener Text</ion-label>
-        <ion-input [(ngModel)]="update.ownText" ngModel name="ownText" type="text" #ownText="ngModel" spellcheck="false" autocapitalize="off" required>
+        <ion-input [(ngModel)]="update.description" ngModel name="description" type="text" #description="ngModel" spellcheck="false" autocapitalize="off" required>
         </ion-input>
       </ion-item>
-      <p [hidden]="ownText.valid || submitted == false" danger padding-left>
-        Format is required
-      </p>
+
       <ion-row responsive-sm>
         <ion-col>
           <button ion-button (click)="updateCode(updateForm, update)" type="submit" primary block>Speichern</button>

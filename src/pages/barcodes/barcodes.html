@@ -28,13 +28,13 @@
 <ion-row>
 <ion-col (click)="showCode(codes)">
     <ion-item>
-      Beschreibung: {{codes.text}}
+      Kategorie: {{codes.categorie}}
     </ion-item>
 
 <!-- shows more details about a code when the related card is clicked -->
     <ion-card-content >
-        Menge: {{codes.anzahl}}<br>
-        Kategorie: {{codes.categorie}}
+        Barcode: {{codes.barcode}}<br>
+        Menge: {{codes.quantity}}<br>
     </ion-card-content>
 </ion-col>
 

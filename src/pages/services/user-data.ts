@@ -32,6 +32,9 @@ export class UserData {
 
 	setUsername(username) {
 		localStorage.setItem('username', username);
+	}
+
+	changeUsername(username) {
 		var user = {
 			id: localStorage.getItem('ma_id'),
 			name: localStorage.getItem('username')
@@ -39,7 +42,7 @@ export class UserData {
 
 		this.http.post('/scripte/updateUsername.php', user)
 				.toPromise()
-				.then(data => console.log(data.json()))
+				.then(data => {console.log(data.json().userUpdate)})
 	}
 
 	getUsername() {

@@ -4,7 +4,6 @@ import {LoadingController, NavController, ModalController, NavParams, ViewContro
 
 import {BarcodeService} from '../services/BarcodeService';
 import {UserData} from '../services/user-data';
-//import {OwnCodePage} from '../ownCode/ownCode';
 import {ToastService} from '../services/ToastService';
 
 @Component({
@@ -30,11 +29,11 @@ export class UpdateCodePage {
 	updateCode(updateForm, update) {
 		var newCode = {
 			id: update.id,
-			ma: this.userData.getUsername(),
+			staff: this.userData.getUsername(),
 			categorie: update.categorie,
-			text: update.text,
-			anzahl: update.anzahl,
-			ownText: update.ownText,
+			barcode: update.barcode,
+			quantity: update.quantity,
+			description: update.description,
 			timeAdd: update.timeAdd
 		}
 
