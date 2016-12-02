@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-//import {BarcodePage} from '../barcodes/barcodes';
-//import {OwnCodePage} from '../ownCode/ownCode';
-//import {NavController} from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';

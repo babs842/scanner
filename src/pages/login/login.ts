@@ -15,7 +15,7 @@ import {SignupPage} from '../signup/signup';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  login: {username?: string, password?: any} = {};
+  login: {email?: any, password?: any} = {};
   //username: any;
   submitted = false;
   url: string;
@@ -34,7 +34,7 @@ export class LoginPage {
        var headers = new Headers();
        headers.append('Content-Type', 'application/x-www-form-urlencoded');
        var data = JSON.stringify(login);
-       this.http.post(this.url + "/scripte/checkLogin.php", data, {
+       this.http.post(this.url + "/scripte/checkLoginNew.php", data, {
          headers: headers
         })
          .map(res => res.json())
