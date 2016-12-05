@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 import {LoadingController, AlertController, NavController, ModalController, NavParams} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
 import {ToastService} from '../services/ToastService';
+import {UpdateCodePage} from '../barcodes/updateCode';
 import {Constants} from '../services/constants';
 
 @Component({
@@ -26,10 +27,9 @@ export class CategoriePage {
 				public constants: Constants) {
 		this.url = constants.root_dir;
 		this.barcodeService.createFirstCategorie();
-		this.barcodeService.loadCategories().then(data => this.categories = data)
 	}
 
-	loadCategories() {
+	ionViewWillEnter() {
 		this.barcodeService.loadCategories().then(data => this.categories = data);
 	}
 
@@ -55,7 +55,7 @@ export class CategoriePage {
 				return (categorie.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
 			});
 		} else {
-			this.loadCategories();
+			this.ionViewWillEnter();
 		}
 	}
 
@@ -87,6 +87,7 @@ export class CategoriePage {
 			}]
 		})
 		alert.present();
+		this.ionViewWillEnter();
 	}
 
 	deleteCategorie(categorie) {
@@ -117,7 +118,7 @@ export class CategoriePage {
 				    <ion-icon name="menu"></ion-icon>        
 				  </button>
 
-				  <ion-title>Alle Codes</ion-title>
+				  <ion-title>Alle Codes in {{categorie}}</ion-title>
 
 				</ion-navbar>
 				</ion-header>
@@ -134,18 +135,19 @@ export class CategoriePage {
 				      Menge: {{codeCategorie.quantity}}<br>
 				      Kategorie: {{codeCategorie.categorie}}<br>			          
 			          Eigener Text: {{codeCategorie.description}}<br>
-			          Erstellt: {{codeCategorie.timeAdd}}
+			          Erstellt: {{codeCategorie.timeAdd}}<br>
+			          Mitarbeiter: {{codeCategorie.name}}
 				    </ion-card-content>
 				    </ion-col>
 
 				    <ion-col>
 				    <ion-buttons end>
-				            <button ion-button icon-left clear small (click)="editCode(codes)">
+				            <button ion-button icon-left clear small (click)="editCode(codeCategorie)">
 				              <ion-icon name="create"></ion-icon>
 				                <div>Bearbeiten</div>
 				            </button>
 				        <hr>
-				            <button ion-button icon-left clear small color="danger" (click)="deleteCode(codes)">
+				            <button ion-button icon-left clear small color="danger" (click)="deleteCode(codeCategorie)">
 				              <ion-icon name="trash"></ion-icon>
 				                <div>Löschen</div>
 				            </button>
@@ -167,6 +169,10 @@ export class CodeInCategorie{
 
 	constructor(public params: NavParams,
 				public http: Http,
+				public nav: NavController,
+				public alert: AlertController,
+				public barcodeService: BarcodeService,
+				public toast: ToastService,
 				public constants: Constants){
 		this.categorie = params.get('categories');
 		this.url = constants.root_dir;
@@ -174,6 +180,38 @@ export class CodeInCategorie{
 
 	ionViewWillEnter() {
 		this.http.get(this.url + "/scripte/showCodeInCategorie.php?categorie=" + this.categorie)
-			.subscribe(data => {this.codeCategories = data.json().codeInCategorie})
+			.subscribe(data => {console.log(data.json());this.codeCategories = data.json().codeInCategorie})
+	}
+
+	editCode(code) {
+		this.nav.push(UpdateCodePage, {update: code});
+		this.barcodeService.loadCodes().then(data => this.codeCategories = data);
+	}
+
+	deleteCode(code) {
+		let alert = this.alert.create({
+			title: "Barcode löschen",
+			message: "Soll der Barcode wirklich gelöscht werden?",
+			buttons: [
+			{
+				text: "Abbrechen"
+			},
+			{
+				text: "Löschen",
+				handler: () => {
+					var headers = new Headers();
+			       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
+					this.http.post(this.url + "/scripte/deleteCode.php", code, {
+						headers: headers
+					})
+						.subscribe(data => {console.log(data);
+									this.toast.getMessage(data.json()["error_msg"]);
+									this.barcodeService.loadCodes().then(data => this.codeCategories = data)
+								})
+				}
+			}]
+		});
+
+		alert.present();
 	}
 }

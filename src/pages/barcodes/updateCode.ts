@@ -40,11 +40,11 @@ export class UpdateCodePage {
 			description: update.description,
 			timeAdd: update.timeAdd
 		}
-
+		console.log("newCode");
 		console.log(newCode);
 
 		this.submitted = true;
-		if(updateForm.valid) {
+		//if(updateForm.valid) {
 			var headers = new Headers();
 	       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
 			this.http.post(this.url + "/scripte/updateCode.php", newCode, {
@@ -52,6 +52,6 @@ export class UpdateCodePage {
 			})
 				.subscribe(data => {console.log(data.json());this.barcodeService.loadCodes()})
 			this.viewCtrl.dismiss();
-		}
+		//}
 	}
 }
