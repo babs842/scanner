@@ -164,7 +164,7 @@ export class CategoriePage {
 
 export class CodeInCategorie{
 	categorie: string[];
-	codeCategories: any[];
+	codeCategories: any;
 	url: string;
 
 	constructor(public params: NavParams,
@@ -185,7 +185,7 @@ export class CodeInCategorie{
 
 	editCode(code) {
 		this.nav.push(UpdateCodePage, {update: code});
-		this.barcodeService.loadCodes().then(data => this.codeCategories = data);
+		//this.barcodeService.loadCodes().then(data => this.codeCategories = data);
 	}
 
 	deleteCode(code) {
@@ -206,7 +206,7 @@ export class CodeInCategorie{
 					})
 						.subscribe(data => {console.log(data);
 									this.toast.getMessage(data.json()["error_msg"]);
-									this.barcodeService.loadCodes().then(data => this.codeCategories = data)
+									this.barcodeService.loadCodes(code.timeAdd).then(data => this.codeCategories = data)
 								})
 				}
 			}]

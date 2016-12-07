@@ -50,7 +50,7 @@ export class UpdateCodePage {
 			this.http.post(this.url + "/scripte/updateCode.php", newCode, {
 				headers: headers
 			})
-				.subscribe(data => {console.log(data.json());this.barcodeService.loadCodes()})
+				.subscribe(data => {console.log(data.json());this.barcodeService.loadCodes(newCode.timeAdd)})
 			this.viewCtrl.dismiss();
 		//}
 	}

@@ -9,6 +9,7 @@ import {ToastService} from '../services/ToastService';
 import {Constants} from '../services/constants';
 import {BarcodePage} from '../barcodes/barcodes';
 import {SignupPage} from '../signup/signup';
+import {InventuryPage} from '../inventury/inventury';
 
 
 @Component({
@@ -16,7 +17,6 @@ import {SignupPage} from '../signup/signup';
 })
 export class LoginPage {
   login: {email?: any, password?: any} = {};
-  //username: any;
   submitted = false;
   url: string;
 
@@ -39,7 +39,7 @@ export class LoginPage {
         })
          .map(res => res.json())
            .subscribe(data => 
-                     {this.toastService.getMessage(data["error_msg"]);if(data.error == false) this.nav.setRoot(BarcodePage);
+                     {this.toastService.getMessage(data["error_msg"]);if(data.error == false) this.nav.setRoot(InventuryPage);
                        this.userData.login(data)});
      }
   

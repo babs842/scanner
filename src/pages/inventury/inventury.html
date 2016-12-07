@@ -1,0 +1,29 @@
+<ion-header>
+<ion-navbar>
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>        
+  </button>
+
+  <ion-buttons end>
+<button ion-button icon-only (click)="showOptions()">
+<ion-icon name="add"></ion-icon>
+</button>
+  </ion-buttons>
+
+  <ion-title>Inventurübersicht</ion-title>
+</ion-navbar>
+
+<!-- Searchbar -->
+<ion-toolbar>
+  <ion-searchbar (ionInput)="onInput($event)" placeholder="Suche nach Inventur"></ion-searchbar>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngFor="let inventuries of inventury">
+<ion-card-content (click)="showInventury(inventuries.timeAdd)">
+Inventur vom {{inventuries.timeAdd | date}}
+</ion-card-content>
+</ion-card>  
+
+</ion-content>

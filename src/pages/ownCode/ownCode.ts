@@ -3,9 +3,6 @@ import {Http, Headers} from '@angular/http';
 
 import {NavController, NavParams, ViewController} from 'ionic-angular';
 
-/*import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';*/
-
 import {BarcodeService} from '../services/BarcodeService';
 import {ToastService} from '../services/ToastService';
 
@@ -39,7 +36,7 @@ export class OwnCodePage {
 		if(form.valid) {
 			var code = this.barcodeService.getDateData(owncode);
 			this.barcodeService.saveCode(code);
-			this.nav.setRoot(BarcodePage);
+			this.nav.pop();
 		}
 	}
 }

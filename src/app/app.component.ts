@@ -6,8 +6,9 @@ import {LoginPage} from '../pages/login/login';
 import {AccountPage} from '../pages/account/account';
 import {ScanBarcodePage} from '../pages/scanCode/scanCode';
 import {BarcodePage} from '../pages/barcodes/barcodes';
-import {CategoriePage} from '../pages/barcodes/categorie';
+import {CategoriePage} from '../pages/categories/categorie';
 import {OwnCodePage} from '../pages/ownCode/ownCode';
+import {InventuryPage} from '../pages/inventury/inventury';
 
 import {UserData} from '../pages/services/user-data';
 
@@ -16,7 +17,7 @@ import {UserData} from '../pages/services/user-data';
 @Component({
   templateUrl: 'app.html'
 })
-export class BarcodeScannerApp {
+export class InventurApp {
 
 	rootPage: any;
 	appPages: Array<{title: string, component: any}>;
@@ -35,14 +36,15 @@ export class BarcodeScannerApp {
       //this.listenToLoginEvents();
 
       if (this.userData.getUsername() !== null) {
-          this.rootPage = BarcodePage;
+          this.rootPage = InventuryPage;
       } else {
         this.rootPage = LoginPage;
       }
     });
 
     this.appPages = [
-      { title: 'Barcodes', component: BarcodePage },
+      { title: 'Inventur', component: InventuryPage},
+      //{ title: 'Barcodes', component: BarcodePage },
       { title: 'Kategorien', component: CategoriePage },
      // { title: 'Scannen', component: ScanBarcodePage },
       //{ title: 'Eigenen Code erstellen', component: OwnCodePage},

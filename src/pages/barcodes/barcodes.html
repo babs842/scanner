@@ -4,7 +4,7 @@
     <ion-icon name="menu"></ion-icon>        
   </button>
 
-  <ion-buttons end>
+  <ion-buttons end *ngIf="done">
 <button ion-button icon-only (click)="showOptions()">
 <ion-icon name="add"></ion-icon>
 </button>
@@ -40,7 +40,7 @@
 
 <ion-col offset width-33>
 <!-- buttons for edit and delete one of the codes -->
-<ion-buttons end>
+<ion-buttons end *ngIf="done">
             <button ion-button icon-left clear small (click)="editCode(codes)">
               <ion-icon name="create"></ion-icon>
                 <div>Bearbeiten</div>

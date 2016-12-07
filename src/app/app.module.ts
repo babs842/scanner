@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { BarcodeScannerApp } from './app.component';
+import { InventurApp } from './app.component';
 
 import {UserData} from '../pages/services/user-data';
 import {ToastService} from '../pages/services/ToastService';
@@ -13,16 +13,17 @@ import { BarcodePage } from '../pages/barcodes/barcodes';
 import { UpdateCodePage } from '../pages/barcodes/updateCode';
 import {SignupPage} from '../pages/signup/signup';
 import {ScanPopover} from '../pages/scanCode/scanCode';
-import {CodeInCategorie} from '../pages/barcodes/categorie';
+import {CodeInCategorie} from '../pages/categories/categorie';
 import {LoginPage} from '../pages/login/login';
 import {AccountPage} from '../pages/account/account';
 import {ScanBarcodePage} from '../pages/scanCode/scanCode';
 import {OwnCodePage} from '../pages/ownCode/ownCode';
-import {CategoriePage} from '../pages/barcodes/categorie';
+import {CategoriePage} from '../pages/categories/categorie';
+import {InventuryPage} from '../pages/inventury/inventury';
 
 @NgModule({
   declarations: [
-    BarcodeScannerApp,
+    InventurApp,
     BarcodePage,
     LoginPage,
     AccountPage,
@@ -32,14 +33,15 @@ import {CategoriePage} from '../pages/barcodes/categorie';
     UpdateCodePage,
     SignupPage,
     ScanPopover,
-    CodeInCategorie
+    CodeInCategorie,
+    InventuryPage
   ],
   imports: [
-    IonicModule.forRoot(BarcodeScannerApp)
+    IonicModule.forRoot(InventurApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    BarcodeScannerApp,
+    InventurApp,
     BarcodePage,
     LoginPage,
     AccountPage,
@@ -49,7 +51,8 @@ import {CategoriePage} from '../pages/barcodes/categorie';
     UpdateCodePage,
     SignupPage,
     ScanPopover,
-    CodeInCategorie
+    CodeInCategorie,
+    InventuryPage
   ],
   providers: [
     UserData,

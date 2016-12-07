@@ -13,8 +13,10 @@ import { StatusBar } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
 import { BarcodePage } from '../pages/barcodes/barcodes';
-import { CategoriePage } from '../pages/barcodes/categorie';
+import { CategoriePage } from '../pages/categories/categorie';
 import { UserData } from '../pages/services/user-data';
+
+
 export var BarcodeScannerApp = (function () {
     function BarcodeScannerApp(platform, menuCtrl, userData) {
         var _this = this;

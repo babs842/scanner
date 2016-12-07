@@ -43,8 +43,22 @@ export class BarcodeService {
 		return barcode;
 	}
 
-	loadCodes() {
-		return this.http.get(this.url + '/scripte/selectCode.php')
+	getToday() {
+		var date = new Date();
+		var today = date.getFullYear() + "-";
+		today += (date.getMonth() + 1) + "-";
+		today += date.getDate();
+		/*today += date.getHours() + ":";
+		today += date.getMinutes() + ":";
+		today += date.getSeconds();*/
+
+		return today;
+	}
+
+	loadCodes(timeAdd) {
+		console.log("timeAdd in loadCodes");
+		console.log(timeAdd);
+		return this.http.get(this.url + '/scripte/selectCode.php?timeAdd='+timeAdd)
 				.toPromise()
 				.then(data => data.json().codes)
 	}

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {ActionSheetController, AlertController, LoadingController, NavController} from 'ionic-angular';
+import {ActionSheetController, AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 
 import {BarcodeService} from '../services/BarcodeService';
 import {OwnCodePage} from '../ownCode/ownCode';
@@ -20,6 +20,7 @@ export class BarcodePage {
 	codeCategories: any;
 	barcode: any;
 	url: string;
+	done = true;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
@@ -28,9 +29,12 @@ export class BarcodePage {
 				public toast: ToastService,
 				public actionSheet: ActionSheetController,
 				public alert: AlertController,
+				public params: NavParams,
 				public constants: Constants) {
 		//barcodes that are given to BarcodePage
-		this.barcode = "code";
+		this.barcode = params.get("barcode");
+		console.log("barcode");
+		console.log(this.barcode);
 		//creates first categorie "Allgemein"
 		this.barcodeService.createFirstCategorie();
 		this.url = constants.root_dir;
@@ -52,7 +56,7 @@ export class BarcodePage {
 
 /* manually loads the codes from the database */
 	loading(refresher) {
-		this.barcodeService.loadCodes().then(data => this.code = data);
+		this.ionViewWillEnter();
 
 		let loading = this.loadingCtrl.create({
 			content: "Lade Barcodes...",
@@ -69,7 +73,7 @@ export class BarcodePage {
 
 /* gets all saved codes when sites is entered */
 	ionViewWillEnter() {
-		this.barcodeService.loadCodes().then(data => this.code = data);
+		this.barcodeService.loadCodes(this.barcode).then(data => {this.code = data});
 	}
 
 /* edit code */
@@ -96,7 +100,7 @@ export class BarcodePage {
 					})
 						.subscribe(data => {console.log(data);
 									this.toast.getMessage(data.json()["error_msg"]);
-									this.barcodeService.loadCodes().then(data => this.code = data)
+									this.barcodeService.loadCodes(this.barcode).then(data => this.code = data)
 								})
 				}
 			}]
