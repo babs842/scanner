@@ -24,7 +24,7 @@ export class OwnCodePage {
 				public toastService: ToastService,
 				public params: NavParams,
 				public viewCtrl: ViewController) {
-		this.barcodeService.createFirstCategorie();
+
 	}
 
 	ionViewWillEnter() {

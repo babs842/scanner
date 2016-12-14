@@ -47,7 +47,7 @@ export class UpdateCodePage {
 		//if(updateForm.valid) {
 			var headers = new Headers();
 	       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-			this.http.post(this.url + "/scripte/updateCode.php", newCode, {
+			this.http.post(this.url + "/updateCode.php", newCode, {
 				headers: headers
 			})
 				.subscribe(data => {console.log(data.json());this.barcodeService.loadCodes(newCode.timeAdd)})

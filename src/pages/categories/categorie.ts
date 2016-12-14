@@ -26,7 +26,6 @@ export class CategoriePage {
 				public alertCtrl: AlertController,
 				public constants: Constants) {
 		this.url = constants.root_dir;
-		this.barcodeService.createFirstCategorie();
 	}
 
 	ionViewWillEnter() {
@@ -64,7 +63,6 @@ export class CategoriePage {
 	}
 
 	createCategorie() {
-		//this.nav.push(CreateCategorie);
 		let alert = this.alertCtrl.create({
 			title: 'Kategorie hinzufügen',
 			inputs: [{
@@ -101,7 +99,7 @@ export class CategoriePage {
 			{
 				text: "Löschen",
 				handler: () => {
-					this.http.get(this.url + "/scripte/deleteCategorie.php?categorie=" + categorie)
+					this.http.get(this.url + "/deleteCategorie.php?categorie=" + categorie)
 			.subscribe(data => this.barcodeService.loadCategories().then(data => this.categories = data))
 				}
 			}]
@@ -179,7 +177,7 @@ export class CodeInCategorie{
 	}
 
 	ionViewWillEnter() {
-		this.http.get(this.url + "/scripte/showCodeInCategorie.php?categorie=" + this.categorie)
+		this.http.get(this.url + "/showCodeInCategorie.php?categorie=" + this.categorie)
 			.subscribe(data => {console.log(data.json());this.codeCategories = data.json().codeInCategorie})
 	}
 

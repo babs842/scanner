@@ -20,7 +20,7 @@ export class BarcodePage {
 	codeCategories: any;
 	barcode: any;
 	url: string;
-	done = true;
+	done = false;
 
 	constructor(public barcodeService: BarcodeService,
 				public http: Http,
@@ -33,11 +33,8 @@ export class BarcodePage {
 				public constants: Constants) {
 		//barcodes that are given to BarcodePage
 		this.barcode = params.get("barcode");
-		console.log("barcode");
-		console.log(this.barcode);
-		//creates first categorie "Allgemein"
-		this.barcodeService.createFirstCategorie();
 		this.url = constants.root_dir;
+		this.barcodeService.loadCategories();
 	}
 
 /* 	- function which controlls the input in the searchbar
@@ -95,7 +92,7 @@ export class BarcodePage {
 				handler: () => {
 					var headers = new Headers();
 			       	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-					this.http.post(this.url + "/scripte/deleteCode.php", code, {
+					this.http.post(this.url + "/deleteCode.php", code, {
 						headers: headers
 					})
 						.subscribe(data => {console.log(data);

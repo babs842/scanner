@@ -29,7 +29,7 @@ export class InventuryPage {
   }
 
   ionViewWillEnter() {
-    this.http.get(this.url + '/scripte/inventury.php')
+    this.http.get(this.url + '/inventury.php')
         .subscribe(data => {this.inventury = data.json().inventury})
   }
 
@@ -44,30 +44,12 @@ export class InventuryPage {
     }
   }
 
-  showOptions() {
-    let choice = this.actionSheet.create({
-      title: "Auswählen",
-      enableBackdropDismiss: true,
-      buttons: [
-      { 
-        text: "Inventur starten",
-        icon: "md-qr-scanner",
-        handler: () => {
-          this.nav.push(BarcodePage, {barcode: this.inventury_date});
-        }
-      },
-      {
-        text: "Abbruch",
-        icon: "md-close",
-        role: "cancel"
-      }
-      ]
-    });
-    choice.present();
+  startInventury() {
+    this.http.get(this.url + '/createInventury.php')
+      .subscribe(data => this.nav.push(BarcodePage, {barcode: this.inventury_date}));
   }
 
   showInventury(timeAdd) {
-    console.log(timeAdd);
     this.nav.push(BarcodePage, {barcode: timeAdd});
   }
 }

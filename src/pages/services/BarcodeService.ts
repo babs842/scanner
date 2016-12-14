@@ -48,9 +48,6 @@ export class BarcodeService {
 		var today = date.getFullYear() + "-";
 		today += (date.getMonth() + 1) + "-";
 		today += date.getDate();
-		/*today += date.getHours() + ":";
-		today += date.getMinutes() + ":";
-		today += date.getSeconds();*/
 
 		return today;
 	}
@@ -58,7 +55,7 @@ export class BarcodeService {
 	loadCodes(timeAdd) {
 		console.log("timeAdd in loadCodes");
 		console.log(timeAdd);
-		return this.http.get(this.url + '/scripte/selectCode.php?timeAdd='+timeAdd)
+		return this.http.get(this.url + '/selectCode.php?timeAdd='+timeAdd)
 				.toPromise()
 				.then(data => data.json().codes)
 	}
@@ -68,7 +65,7 @@ export class BarcodeService {
 		console.log(data);
 		var headers = new Headers();
        	headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		return this.http.post(this.url + "/scripte/saveCode.php", data, {
+		return this.http.post(this.url + "/saveCode.php", data, {
 			headers: headers
 		})
 				.toPromise()
@@ -76,19 +73,13 @@ export class BarcodeService {
 	}
 
 	loadCategories() {
-		return this.http.get(this.url + "/scripte/getCategories.php")
+		return this.http.get(this.url + "/selectCategories.php")
 			.toPromise()
 			.then(data => data = data.json().categorie)
 	}
 
-	createFirstCategorie() {
-		return this.http.get(this.url + "/scripte/createTableCategorie.php")
-			.toPromise()
-			.then(data => data.json().categorie)
-	}
-
 	createCategorie(categorie) {
-		return this.http.get(this.url + "/scripte/createCategorie.php?categorie=" + categorie)
+		return this.http.get(this.url + "/createCategorie.php?categorie=" + categorie)
 			.toPromise()
 			.then(data => data.json())
 	}
